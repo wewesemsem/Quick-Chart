@@ -25,7 +25,7 @@ SECRET_KEY = '8gb0*m2=wz^#=z55pho-pmk$4+6ez5di5_q-qbjcvp+kc!bn%$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://quickcharter.herokuapp.com/']
+ALLOWED_HOSTS = ['https://quickcharter.herokuapp.com/', 'localhost']
 
 
 # Application definition
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../')],
+        'DIRS': [BASE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "../", "build", "static")  
+    os.path.join(BASE_DIR, "build", "static")  
 ]
 
 CORS_ORIGIN_WHITELIST = (
