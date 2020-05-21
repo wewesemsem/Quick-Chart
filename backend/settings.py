@@ -25,7 +25,7 @@ SECRET_KEY = '8gb0*m2=wz^#=z55pho-pmk$4+6ez5di5_q-qbjcvp+kc!bn%$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://quickcharter.herokuapp.com/', 'localhost']
+ALLOWED_HOSTS = ['quickcharter.herokuapp.com', 'localhost']
 
 
 # Application definition
