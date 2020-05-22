@@ -4,18 +4,57 @@ import axios from 'axios';
 class Home extends React.Component {
   constructor() {
     super();
-    this.state = { message: 'Oops not yet' };
+    this.state = { uploaded: false, csvFile: null };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  async componentDidMount() {
+
+  handleChange(event) {
+    let state = {
+      uploaded: false,
+      csvFile: event.target.files[0],
+    };
+    this.setState(state);
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
     try {
-      const message = await axios.get('/api/getChart');
-      this.setState({ message: message.data });
+      const data = new FormData();
+      data.append('dataFile', this.state.csvFile);
+      const res = await axios.post('/api/post_csv_file', data);
+      console.log("SUCCHESSS",res);
     } catch (err) {
       console.log(err);
     }
   }
+
   render() {
-    return <div>{this.state.message}</div>;
+    if (this.state.uploaded) {
+      return (
+        <div>
+          Your file has uploaded. Choose chart options below to generate your
+          chart.
+        </div>
+      );
+    }
+    return (
+      <div>
+        <h3>Upload a data file: </h3>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            CSV file:
+            <input
+              name="dataFile"
+              type="file"
+              onChange={this.handleChange}
+              required
+            />
+          </label>
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+    );
   }
 }
 
