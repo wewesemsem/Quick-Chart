@@ -23,21 +23,14 @@ class Home extends React.Component {
       const data = new FormData();
       data.append('dataFile', this.state.csvFile);
       const res = await axios.post('/api/post_csv_file', data);
-      console.log("SUCCHESSS",res);
+      if (res.status === 200)
+        this.setState({ uploaded: true, csvFile: this.state.csvFile });
     } catch (err) {
       console.log(err);
     }
   }
 
   render() {
-    if (this.state.uploaded) {
-      return (
-        <div>
-          Your file has uploaded. Choose chart options below to generate your
-          chart.
-        </div>
-      );
-    }
     return (
       <div>
         <h3>Upload a data file: </h3>
@@ -53,6 +46,12 @@ class Home extends React.Component {
           </label>
           <button type="submit">Upload</button>
         </form>
+        {this.state.uploaded && (
+          <div>
+            Your file has uploaded. Choose chart options below to generate your
+            chart or click "choose file" to change the file.
+          </div>
+        )}
       </div>
     );
   }
