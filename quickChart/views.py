@@ -27,7 +27,7 @@ def post_csv_file(request):
     #return column titles
     df.columns = df.iloc[0]
     column_titles  = list(df.columns.values)
-    print(column_titles)
-    return HttpResponse(column_titles)
+    response_str = ",".join(str(title) for title in column_titles)
+    return HttpResponse(response_str)
 
 

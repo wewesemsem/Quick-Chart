@@ -23,8 +23,10 @@ class Home extends React.Component {
       const data = new FormData();
       data.append('dataFile', this.state.csvFile);
       const res = await axios.post('/api/post_csv_file', data);
-      if (res.status === 200)
+      if (res.status === 200) {
+        let column_titles = res.data.split(",")
         this.setState({ uploaded: true, csvFile: this.state.csvFile });
+      }
     } catch (err) {
       console.log(err);
     }
