@@ -23,12 +23,11 @@ def post_csv_file(request):
     #read csv_file, create dataframe
     df = pd.read_csv(io_string, header=None, sep='\n')
     df = df[0].str.split(',', expand=True)
-
-    #find max row to get column row, if all equal columns is 1st row 
-    column_titles  = df.iloc[4]
-    print("------>", column_titles)
-
-    #will later return chart options
-    return HttpResponse("success")
+    
+    #return column titles
+    df.columns = df.iloc[0]
+    column_titles  = list(df.columns.values)
+    print(column_titles)
+    return HttpResponse(column_titles)
 
 
