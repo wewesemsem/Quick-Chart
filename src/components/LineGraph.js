@@ -7,6 +7,8 @@ class LineGraph extends React.Component {
     this.state = {
       XAxis: '',
       YAxis: '',
+      charted: false,
+      chartFile: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +27,11 @@ class LineGraph extends React.Component {
       const data = new FormData();
       data.append('AxisOptions', [this.state.XAxis, this.state.YAxis]);
       const res = await axios.post('/api/post_chart_options', data);
-      console.log('Submitted!----->', res);
+
+      let state = { ...this.state };
+      state.charted = true;
+      state.chartFile = res.data;
+      this.setState(state);
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +67,11 @@ class LineGraph extends React.Component {
           </label>
           <button type="submit">Make Chart</button>
         </form>
+        {this.state.charted && (
+          <div>
+            <img src={'../uploads/userGraph.png'} alt="" />
+          </div>
+        )}
       </div>
     );
   }

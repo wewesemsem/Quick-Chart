@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'quickChart',
     'corsheaders',
     'rest_framework',
-    'pandas'
+    'pandas',
+    'matplotlib'
 ]
 
 MIDDLEWARE = [

@@ -12,6 +12,7 @@ django-cors-headers = "*"
 whitenoise = "*"
 gunicorn = "*"
 pandas = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.8"
