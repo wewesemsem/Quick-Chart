@@ -23,7 +23,7 @@ class LineGraph extends React.Component {
     event.preventDefault();
     try {
       const data = new FormData();
-      data.append('AxisOptions', this.state);
+      data.append('AxisOptions', [this.state.XAxis, this.state.YAxis]);
       const res = await axios.post('/api/post_chart_options', data);
       console.log('Submitted!----->', res);
     } catch (error) {

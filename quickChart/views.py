@@ -12,7 +12,10 @@ def index(request):
 @api_view(['POST'])
 @csrf_exempt
 def post_chart_options(request):
-    print("HERE------->>>>", request.data)
+    axis = request.data['AxisOptions'].split(',')
+    x_axis = axis[0]
+    y_axis = axis[1]
+    
     return HttpResponse("Sending back a chart soon:)")
 
 @api_view(['POST'])
