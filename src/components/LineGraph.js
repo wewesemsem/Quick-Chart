@@ -22,7 +22,10 @@ class LineGraph extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     try {
-      console.log('Submitted!');
+      const data = new FormData();
+      data.append('AxisOptions', this.state);
+      const res = await axios.post('/api/post_chart_options', data);
+      console.log('Submitted!----->', res);
     } catch (error) {
       console.log(error);
     }

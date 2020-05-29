@@ -9,7 +9,10 @@ import pandas as pd
 def index(request):
     return render(request, "build/index.html")
 
-def getChart(request):
+@api_view(['POST'])
+@csrf_exempt
+def post_chart_options(request):
+    print("HERE------->>>>", request.data)
     return HttpResponse("Sending back a chart soon:)")
 
 @api_view(['POST'])
