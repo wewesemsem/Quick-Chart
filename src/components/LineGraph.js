@@ -69,7 +69,7 @@ class LineGraph extends React.Component {
         </form>
         {this.state.charted && (
           <div>
-            <img src={'../uploads/userGraph.png'} alt="" />
+            <img src={require('../' + this.state.chartFile)} alt="" />
           </div>
         )}
       </div>
