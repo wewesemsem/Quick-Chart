@@ -7,6 +7,7 @@ from rest_framework.response import Response
 import csv 
 import io
 import pandas as pd 
+import random
 import matplotlib
 from matplotlib import pyplot as plt
 
@@ -26,13 +27,15 @@ def post_chart_options(request):
     y_axis_values = list(current_df[y_axis])[1:]
 
     #make chart
+    random_int = random.randrange(7000)
+    user_graph_title = 'uploads/userGraph'+str(random_int)+'.png'
     matplotlib.use('agg')
     plt.close('all')
     plt.figure() 
     plt.plot(x_axis_values, y_axis_values)
-    plt.savefig('src/uploads/userGraph.png')
+    plt.savefig('src/'+user_graph_title)
     
-    return Response("uploads/userGraph.png", content_type='image/png', status=status.HTTP_201_CREATED)
+    return Response(user_graph_title, content_type='image/png', status=status.HTTP_201_CREATED)
 
 @api_view(['POST'])
 @csrf_exempt
