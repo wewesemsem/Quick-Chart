@@ -30,8 +30,10 @@ class LineGraph extends React.Component {
 
       let state = { ...this.state };
       state.charted = true;
-      state.chartFile = res.data;
-      state.chartFile = require('../' + state.chartFile);
+
+      const images = await require.context('../', true);
+      state.chartFile = images('./' + res.data);
+
       this.setState(state);
     } catch (error) {
       console.log(error);
