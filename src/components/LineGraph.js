@@ -31,6 +31,7 @@ class LineGraph extends React.Component {
       let state = { ...this.state };
       state.charted = true;
       state.chartFile = res.data;
+      state.chartFile = require('../' + state.chartFile);
       this.setState(state);
     } catch (error) {
       console.log(error);
@@ -69,7 +70,7 @@ class LineGraph extends React.Component {
         </form>
         {this.state.charted && (
           <div>
-            <img src={require('../' + this.state.chartFile)} alt="" />
+            <img src={this.state.chartFile} alt="" />
           </div>
         )}
       </div>
