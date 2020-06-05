@@ -25,7 +25,11 @@ class LineGraph extends React.Component {
     event.preventDefault();
     try {
       const data = new FormData();
-      data.append('AxisOptions', [this.state.XAxis, this.state.YAxis]);
+      data.append('AxisOptions', [
+        this.state.XAxis,
+        this.state.YAxis,
+        this.props.csvFilePath,
+      ]);
       const res = await axios.post('/api/post_chart_options', data);
 
       let state = { ...this.state };

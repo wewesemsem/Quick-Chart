@@ -5,7 +5,12 @@ import ChartOptions from './ChartOptions';
 class Home extends React.Component {
   constructor() {
     super();
-    this.state = { uploaded: false, csvFile: null, columnTitles: null };
+    this.state = {
+      uploaded: false,
+      csvFile: null,
+      columnTitles: null,
+      csvFilePath: null,
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -26,10 +31,12 @@ class Home extends React.Component {
       const res = await axios.post('/api/post_csv_file', data);
       if (res.status === 200) {
         let columnTitles = res.data.split(',');
+        let csvFilePath = columnTitles.pop();
         this.setState({
           uploaded: true,
           csvFile: this.state.csvFile,
           columnTitles: columnTitles,
+          csvFilePath,
         });
       }
     } catch (err) {
@@ -57,7 +64,10 @@ class Home extends React.Component {
           <div>
             Your file has uploaded. Choose chart options below to generate your
             chart or click "choose file" to change the file.
-            <ChartOptions columnTitles={this.state.columnTitles} />
+            <ChartOptions
+              columnTitles={this.state.columnTitles}
+              csvFilePath={this.state.csvFilePath}
+            />
           </div>
         )}
       </div>

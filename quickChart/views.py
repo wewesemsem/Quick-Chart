@@ -17,12 +17,12 @@ def index(request):
 @api_view(['POST'])
 @csrf_exempt
 def post_chart_options(request):
-    axis = request.data['AxisOptions'].split(',')
-    x_axis = axis[0]
-    y_axis = axis[1]
+    user_chart_data = request.data['AxisOptions'].split(',')
+    x_axis = user_chart_data[0]
+    y_axis = user_chart_data[1]
 
     #grab columns
-    current_df = pd.read_pickle('uploads/current_user_df.pkl')
+    current_df = pd.read_pickle(user_chart_data[2])
     x_axis_values = list(current_df[x_axis])[1:]
     y_axis_values = list(current_df[y_axis])[1:]
 
@@ -49,11 +49,16 @@ def post_csv_file(request):
     df = pd.read_csv(io_string, header=None, sep='\n')
     df = df[0].str.split(',', expand=True)
     
-    #return column titles
+    #return column titles, save file
     df.columns = df.iloc[0]
-    df.to_pickle('uploads/current_user_df.pkl')
-    column_titles  = list(df.columns.values)
-    response_str = ",".join(str(title) for title in column_titles)
+
+    random_int = random.randrange(7000)
+    file_name = 'uploads/'+str(random_int)+'.pkl'
+    df.to_pickle(file_name)
+
+    response_arr  = list(df.columns.values)
+    response_arr.append(file_name)
+    response_str = ",".join(str(title) for title in response_arr)
     return HttpResponse(response_str)
 
 
