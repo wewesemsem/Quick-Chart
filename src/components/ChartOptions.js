@@ -42,7 +42,10 @@ class ChartOptions extends React.Component {
           })}
         </select>
         {this.state.selectedChart['Line Graph'] && (
-          <LineGraph columnTitles={this.props.columnTitles} />
+          <LineGraph
+            columnTitles={this.props.columnTitles}
+            csvFilePath={this.props.csvFilePath}
+          />
         )}
       </div>
     );
