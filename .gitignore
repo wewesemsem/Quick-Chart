@@ -24,4 +24,4 @@ yarn-error.log*
 
 /uploads
 
-/src/uploads
+/public/uploads
