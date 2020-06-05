@@ -33,7 +33,7 @@ def post_chart_options(request):
     plt.close('all')
     plt.figure() 
     plt.plot(x_axis_values, y_axis_values)
-    plt.savefig('src/'+user_graph_title)
+    plt.savefig('public/'+user_graph_title)
     
     return Response(user_graph_title, content_type='image/png', status=status.HTTP_201_CREATED)
 
