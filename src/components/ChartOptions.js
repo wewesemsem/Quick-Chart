@@ -1,5 +1,6 @@
 import React from 'react';
 import LineGraph from './LineGraph';
+import { Form } from 'react-bootstrap';
 
 class ChartOptions extends React.Component {
   constructor() {
@@ -36,11 +37,22 @@ class ChartOptions extends React.Component {
   render() {
     return (
       <div>
-        <select value={this.state.selected} onChange={this.handleChange}>
-          {this.state.chartOptions.map((chart) => {
-            return <option value={chart}>{chart}</option>;
-          })}
-        </select>
+        <Form>
+          <Form.Group>
+            <Form.Label>Chart Type</Form.Label>
+            <Form.Control
+              as="select"
+              value={this.state.selected}
+              onChange={this.handleChange}
+              className="Inputs"
+            >
+              {this.state.chartOptions.map((chart) => {
+                return <option value={chart}>{chart}</option>;
+              })}
+            </Form.Control>
+          </Form.Group>
+        </Form>
+
         {this.state.selectedChart['Line Graph'] && (
           <LineGraph
             columnTitles={this.props.columnTitles}
