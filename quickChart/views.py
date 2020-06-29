@@ -33,7 +33,7 @@ def post_chart_options(request):
     user_graph_title = 'uploads/userGraph'+str(random_int)+'.png'
     matplotlib.use('agg')
     plt.close('all')
-    plt.figure()
+    plt.figure(figsize=(7, 7))
     plt.plot(x_axis_values, y_axis_values)
 
     # chart labels
