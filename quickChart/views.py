@@ -35,6 +35,12 @@ def post_chart_options(request):
     plt.close('all')
     plt.figure()
     plt.plot(x_axis_values, y_axis_values)
+
+    # chart labels
+    plt.title(y_axis+" vs. "+x_axis)
+    plt.xlabel(x_axis)
+    plt.ylabel(y_axis)
+
     plt.savefig('public/'+user_graph_title)
 
     return Response(user_graph_title, content_type='image/png', status=status.HTTP_201_CREATED)
@@ -63,4 +69,3 @@ def post_csv_file(request):
     response_arr.append(file_name)
     response_str = ",".join(str(title) for title in response_arr)
     return HttpResponse(response_str)
-
