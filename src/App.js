@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
 import Home from './components/Home';
+import { Container } from 'react-bootstrap';
 
 function App() {
   return (
-    <div>
+    <Container fluid className='App'>
       <Home />
-    </div>
+    </Container>
   );
 }
 

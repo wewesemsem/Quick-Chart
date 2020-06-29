@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ChartOptions from './ChartOptions';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 class Home extends React.Component {
   constructor() {
@@ -47,23 +48,22 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h3>Upload a data file: </h3>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            CSV file:
-            <input
-              name="dataFile"
-              type="file"
-              onChange={this.handleChange}
-              required
-            />
-          </label>
-          <button type="submit">Upload</button>
-        </form>
+        <h3>Quick-Chart: Upload a data file to create a chart.</h3>
+        <Form inline onSubmit={this.handleSubmit}>
+          <Form.Label>CSV file: </Form.Label>
+          <Form.Group>
+            <Form.File name="dataFile" onChange={this.handleChange} required />
+          </Form.Group>
+          <Button type="submit" variant="outline-success">
+            Upload
+          </Button>
+        </Form>
         {this.state.uploaded && (
           <div>
-            Your file has uploaded. Choose chart options below to generate your
-            chart or click "choose file" to change the file.
+            <Alert variant="success" className="Inputs Alert">
+              Your file has uploaded. Select chart options below or click
+              "choose file" to change the file.
+            </Alert>
             <ChartOptions
               columnTitles={this.state.columnTitles}
               csvFilePath={this.state.csvFilePath}

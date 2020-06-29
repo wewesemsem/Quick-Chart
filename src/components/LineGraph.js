@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button, Form } from 'react-bootstrap';
 
 class LineGraph extends React.Component {
   constructor() {
@@ -44,33 +45,40 @@ class LineGraph extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            X Axis:
-            <select
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group>
+            <Form.Label>X Axis:</Form.Label>
+            <Form.Control
+              as="select"
               id="XAxis"
               value={this.state.XAxis}
               onChange={this.handleChange}
+              className="Inputs"
             >
               {this.props.columnTitles.map((title) => {
                 return <option value={title}>{title}</option>;
               })}
-            </select>
-          </label>
-          <label>
-            Y Axis:
-            <select
+            </Form.Control>
+
+            <Form.Label>Y Axis:</Form.Label>
+            <Form.Control
+              as="select"
               id="YAxis"
               value={this.state.YAxis}
               onChange={this.handleChange}
+              className="Inputs"
             >
               {this.props.columnTitles.map((title) => {
                 return <option value={title}>{title}</option>;
               })}
-            </select>
-          </label>
-          <button type="submit">Make Chart</button>
-        </form>
+            </Form.Control>
+          </Form.Group>
+
+          <Button type="submit" variant="outline-success">
+            Make Chart
+          </Button>
+        </Form>
+
         {this.state.charted && (
           <div>
             <img src={this.state.chartFile} alt="" />
