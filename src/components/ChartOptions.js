@@ -1,6 +1,7 @@
 import React from 'react';
 import LineGraph from './LineGraph';
 import BarChart from './BarChart';
+import PieChart from './PieChart';
 import { Form } from 'react-bootstrap';
 
 class ChartOptions extends React.Component {
@@ -62,6 +63,12 @@ class ChartOptions extends React.Component {
         )}
         {this.state.selectedChart['Bar Chart'] && (
           <BarChart
+            columnTitles={this.props.columnTitles}
+            csvFilePath={this.props.csvFilePath}
+          />
+        )}
+        {this.state.selectedChart['Pie Chart'] && (
+          <PieChart
             columnTitles={this.props.columnTitles}
             csvFilePath={this.props.csvFilePath}
           />

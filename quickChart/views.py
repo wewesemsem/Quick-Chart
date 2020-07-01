@@ -28,9 +28,7 @@ def post_chart_options(request):
     x_axis_values = list(current_df[x_axis])[1:]
     y_axis_values = list(current_df[y_axis])[1:]
 
-    # make chart
-    random_int = random.randrange(7000)
-    user_graph_title = 'uploads/userGraph'+str(random_int)+'.png'
+    # plot chart
     matplotlib.use('agg')
     plt.close('all')
     plt.figure(figsize=(7, 7))
@@ -41,6 +39,9 @@ def post_chart_options(request):
     plt.xlabel(x_axis)
     plt.ylabel(y_axis)
 
+    # save chart
+    random_int = random.randrange(7000)
+    user_graph_title = 'uploads/userGraph'+str(random_int)+'.png'
     plt.savefig('public/'+user_graph_title)
 
     return Response(user_graph_title, content_type='image/png', status=status.HTTP_201_CREATED)
@@ -83,9 +84,7 @@ def post_bar_chart(request):
     x_axis_values = list(current_df[x_axis])[1:]
     y_axis_values = list(current_df[y_axis])[1:]
 
-    # make chart
-    random_int = random.randrange(7000)
-    user_graph_title = 'uploads/userGraph'+str(random_int)+'.png'
+    # plot chart
     matplotlib.use('agg')
     plt.close('all')
     plt.figure(figsize=(7, 7))
@@ -96,6 +95,39 @@ def post_bar_chart(request):
     plt.xlabel(x_axis)
     plt.ylabel(y_axis)
 
+    # save chart
+    random_int = random.randrange(7000)
+    user_graph_title = 'uploads/userGraph'+str(random_int)+'.png'
+    plt.savefig('public/'+user_graph_title)
+
+    return Response(user_graph_title, content_type='image/png', status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+@csrf_exempt
+def post_pie_chart(request):
+    user_chart_data = request.data['AxisOptions'].split(',')
+    user_labels = user_chart_data[0]
+    sizes = user_chart_data[1]
+
+    # grab columns
+    current_df = pd.read_pickle(user_chart_data[2])
+    labels_values = list(current_df[user_labels])[1:]
+    sizes_values = list(current_df[sizes])[1:]
+
+    # plot chart
+    matplotlib.use('agg')
+    plt.close('all')
+    plt.figure(figsize=(7, 7))
+    plt.pie(sizes_values, labels=labels_values, autopct='%0.1f%%')
+    plt.axis('equal')
+
+    # chart labels
+    plt.title(user_labels+" by "+sizes)
+
+    # save chart
+    random_int = random.randrange(7000)
+    user_graph_title = 'uploads/userGraph'+str(random_int)+'.png'
     plt.savefig('public/'+user_graph_title)
 
     return Response(user_graph_title, content_type='image/png', status=status.HTTP_201_CREATED)
