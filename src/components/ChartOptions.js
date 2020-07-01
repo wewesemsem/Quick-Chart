@@ -2,6 +2,7 @@ import React from 'react';
 import LineGraph from './LineGraph';
 import BarChart from './BarChart';
 import PieChart from './PieChart';
+import Histogram from './Histogram';
 import { Form } from 'react-bootstrap';
 
 class ChartOptions extends React.Component {
@@ -9,11 +10,12 @@ class ChartOptions extends React.Component {
     super();
     this.state = {
       selected: '',
-      chartOptions: ['Bar Chart', 'Line Graph', 'Pie Chart'],
+      chartOptions: ['Bar Chart', 'Line Graph', 'Pie Chart', 'Histogram'],
       selectedChart: {
         'Bar Chart': false,
         'Line Graph': false,
         'Pie Chart': false,
+        Histogram: false,
       },
     };
     this.handleChange = this.handleChange.bind(this);
@@ -69,6 +71,12 @@ class ChartOptions extends React.Component {
         )}
         {this.state.selectedChart['Pie Chart'] && (
           <PieChart
+            columnTitles={this.props.columnTitles}
+            csvFilePath={this.props.csvFilePath}
+          />
+        )}
+        {this.state.selectedChart['Histogram'] && (
+          <Histogram
             columnTitles={this.props.columnTitles}
             csvFilePath={this.props.csvFilePath}
           />
