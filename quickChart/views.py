@@ -43,7 +43,7 @@ def post_csv_file(request):
 
 @api_view(['POST'])
 @csrf_exempt
-def post_chart_options(request):
+def post_line_graph(request):
     user_chart_data = request.data['AxisOptions'].split(',')
     x_axis = user_chart_data[0]
     y_axis = user_chart_data[1]

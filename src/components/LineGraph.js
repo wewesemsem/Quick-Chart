@@ -31,7 +31,7 @@ class LineGraph extends React.Component {
         this.state.YAxis,
         this.props.csvFilePath,
       ]);
-      const res = await axios.post('/api/post_chart_options', data);
+      const res = await axios.post('/api/post_line_graph', data);
 
       let state = { ...this.state };
       state.charted = true;
