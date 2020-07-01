@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/post_chart_options', views.post_chart_options,
          name='post_chart_options'),
     path('api/post_csv_file', views.post_csv_file, name='post_csv_file'),
+    path('api/post_bar_chart', views.post_bar_chart, name='post_bar_chart'),
 ]

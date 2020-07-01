@@ -69,3 +69,33 @@ def post_csv_file(request):
     response_arr.append(file_name)
     response_str = ",".join(str(title) for title in response_arr)
     return HttpResponse(response_str)
+
+
+@api_view(['POST'])
+@csrf_exempt
+def post_bar_chart(request):
+    user_chart_data = request.data['AxisOptions'].split(',')
+    x_axis = user_chart_data[0]
+    y_axis = user_chart_data[1]
+
+    # grab columns
+    current_df = pd.read_pickle(user_chart_data[2])
+    x_axis_values = list(current_df[x_axis])[1:]
+    y_axis_values = list(current_df[y_axis])[1:]
+
+    # make chart
+    random_int = random.randrange(7000)
+    user_graph_title = 'uploads/userGraph'+str(random_int)+'.png'
+    matplotlib.use('agg')
+    plt.close('all')
+    plt.figure(figsize=(7, 7))
+    plt.bar(x_axis_values, y_axis_values)
+
+    # chart labels
+    plt.title(y_axis+" by "+x_axis)
+    plt.xlabel(x_axis)
+    plt.ylabel(y_axis)
+
+    plt.savefig('public/'+user_graph_title)
+
+    return Response(user_graph_title, content_type='image/png', status=status.HTTP_201_CREATED)
