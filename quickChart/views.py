@@ -53,11 +53,16 @@ def post_line_graph(request):
     x_axis_values = list(current_df[x_axis])[1:]
     y_axis_values = list(current_df[y_axis])[1:]
 
+    y_axis_values_float = []
+
+    for i in range(len(y_axis_values)):
+        y_axis_values_float.append(float(y_axis_values[i]))
+
     # plot chart
     matplotlib.use('agg')
     plt.close('all')
     plt.figure(figsize=(7, 7))
-    plt.plot(x_axis_values, y_axis_values)
+    plt.plot(x_axis_values, y_axis_values_float)
 
     # chart labels
     plt.title(y_axis+" vs. "+x_axis)
